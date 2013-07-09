@@ -8,7 +8,7 @@ set ModuleDir [file normalize [file join $ThisScriptDir ..]]
 
 source [file join $ThisScriptDir test_helpers.tcl]
 
-package require appdirs
+package require AppDirs
 
 test dataHome-1 {Checks that sensible Linux dataHome directory returned} \
 -setup {
