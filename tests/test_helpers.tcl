@@ -1,4 +1,5 @@
 # Helper functions for the tests
+package require struct::list
 
 namespace eval TestHelpers {
   variable storedOS ""
@@ -52,10 +53,19 @@ proc TestHelpers::setEnvironment {os user} {
     "Linux" {
       SetEnvVar HOME "/home/$user"
     }
-    "Windows 2000" -
-    "Windows Vista" -
+    "Windows 2000" {
+      SetEnvVar ALLUSERSPROFILE "C:\\ProgramData"
+      SetEnvVar APPDATA "C:\\Cocuments and Settings\\$user\\Application Data"
+      SetEnvVar PROGRAMDATA "C:\\ProgramData"
+    }
+    "Windows Vista" {
+      SetEnvVar ALLUSERSPROFILE "C:\\ProgramData"
+      SetEnvVar APPDATA "C:\\Documents and Settings\\$user\\Application Data"
+      SetEnvVar PROGRAMDATA "C:\\ProgramData"
+    }
     "Windows XP" {
-      SetEnvVar APPDATA "c:\\documents and settings\\$user\\application data"
+      SetEnvVar ALLUSERSPROFILE "C:\\Documents and Settings\All Users"
+      SetEnvVar APPDATA "C:\\Documents and Settings\\$user\\Application Data"
     }
   }
 }
@@ -63,4 +73,8 @@ proc TestHelpers::setEnvironment {os user} {
 proc TestHelpers::restoreEnvironment {} {
   RestoreOS
   RestoreEnvVars
+}
+
+proc TestHelpers::countMatches {sequence lambda} {
+  llength [struct::list filter $sequence [list apply $lambda]]
 }

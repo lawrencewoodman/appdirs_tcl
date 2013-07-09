@@ -10,36 +10,21 @@ package require Tcl 8.6
 package require xdgbasedir
 
 ::oo::class create AppDirs {
-  variable appName brandName method
+  variable appName brandName
 
   constructor {_brandName _appName} {
     set appName $_appName
     set brandName $_brandName
-    my SetMethod
-  }
-
-  method SetMethod {} {
-    switch $::tcl_platform(os) {
-      Linux {
-        set method "XDG"
-      }
-      "Windows 2000" -
-      "Windows Vista" -
-      "Windows XP" {
-        set method "APPDATA"
-      }
-      default {
-        set method "NONE"
-      }
-    }
   }
 
   method dataHome {} {
-    switch $method {
-      XDG {
+    switch $::tcl_platform(os) {
+      Linux {
         return [XDG::DATA_HOME $appName]
       }
-      APPDATA {
+      "Windows 2000" -
+      "Windows Vista" -
+      "Windows XP"  {
         return [join [list $::env(APPDATA) $brandName $appName] \\]
       }
       default {
@@ -49,12 +34,32 @@ package require xdgbasedir
   }
 
   method configHome {} {
-    switch $method {
-      XDG {
+    switch $::tcl_platform(os) {
+      Linux {
         return [XDG::CONFIG_HOME $appName]
       }
-      APPDATA {
+      "Windows 2000" -
+      "Windows Vista" -
+      "Windows XP" {
         return [join [list $::env(APPDATA) $brandName $appName] \\]
+      }
+      default {
+        return ""
+      }
+    }
+  }
+
+  method configDirs {} {
+    switch $::tcl_platform(os) {
+      Linux {
+        return [XDG::CONFIG_DIRS $appName]
+      }
+      "Windows 2000" -
+      "Windows Vista" {
+        return [join [list $::env(PROGRAMDATA) $brandName $appName] \\]
+      }
+      "Windows XP" {
+        return [join [list $::env(ALLUSERSPROFILE) $brandName $appName] \\]
       }
       default {
         return ""
