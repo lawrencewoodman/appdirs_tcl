@@ -17,6 +17,7 @@ package require xdgbasedir
     set brandName $_brandName
   }
 
+  # Return location of user-specific data files
   method dataHome {} {
     switch $::tcl_platform(os) {
       Linux {
@@ -33,6 +34,7 @@ package require xdgbasedir
     }
   }
 
+  # Return location of user-specific configuration files
   method configHome {} {
     switch $::tcl_platform(os) {
       Linux {
@@ -49,6 +51,7 @@ package require xdgbasedir
     }
   }
 
+  # Return a list of locations for system-wide configuration files
   method configDirs {} {
     switch $::tcl_platform(os) {
       Linux {
