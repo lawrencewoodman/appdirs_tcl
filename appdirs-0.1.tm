@@ -69,4 +69,23 @@ package require xdgbasedir
       }
     }
   }
+
+  # Return a list of locations for system-wide data files
+  method dataDirs {} {
+    switch $::tcl_platform(os) {
+      Linux {
+        return [XDG::DATA_DIRS $appName]
+      }
+      "Windows 2000" -
+      "Windows Vista" {
+        return [join [list $::env(PROGRAMDATA) $brandName $appName] \\]
+      }
+      "Windows XP" {
+        return [join [list $::env(ALLUSERSPROFILE) $brandName $appName] \\]
+      }
+      default {
+        return ""
+      }
+    }
+  }
 }
