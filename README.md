@@ -10,12 +10,7 @@ Requirements
 
 Installation
 ------------
-To install the module you can use the `installmodule.tcl` script as root:
-
-    $ tclsh installmodule.tcl AppDirs-*.tm
-
-
-Alternatively if you want to manually copy the file `AppDirs-*.tm` to a specific location that tcl expects to find modules.  This would typically be something like:
+To install the module you can use the [installmodule.tcl](https://github.com/LawrenceWoodman/installmodule_tcl) script or if you want to manually copy the file `AppDirs-*.tm` to a specific location that tcl expects to find modules.  This would typically be something like:
 
     /usr/share/tcltk/tcl8.6/tcl8/
 
