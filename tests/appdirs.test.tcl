@@ -50,4 +50,44 @@ returned} -setup {
   TestHelpers::restoreEnvironment
 } -match regexp -result {^.*?myUser.*?myBrand\\myApp$}
 
+test configHome-1 {Checks that sensible Linux configHome directory returned} \
+-setup {
+  TestHelpers::setEnvironment Linux myUser
+  set myAppDirs [AppDirs new myBrand myApp]
+} -body {
+  $myAppDirs configHome
+} -cleanup {
+  TestHelpers::restoreEnvironment
+} -match regexp -result "$::env(HOME).*?myApp"
+
+test configHome-2 {Checks that sensible Windows 2000 configHome directory \
+returned} -setup {
+  TestHelpers::setEnvironment "Windows 2000" myUser
+  set myAppDirs [AppDirs new myBrand myApp]
+} -body {
+  $myAppDirs configHome
+} -cleanup {
+  TestHelpers::restoreEnvironment
+} -match regexp -result {^.*?myUser.*?myBrand\\myApp$}
+
+test configHome-3 {Checks that sensible Windows Vista configHome directory \
+returned} -setup {
+  TestHelpers::setEnvironment "Windows Vista" myUser
+  set myAppDirs [AppDirs new myBrand myApp]
+} -body {
+  $myAppDirs configHome
+} -cleanup {
+  TestHelpers::restoreEnvironment
+} -match regexp -result {^.*?myUser.*?myBrand\\myApp$}
+
+test configHome-4 {Checks that sensible Windows XP configHome directory \
+returned} -setup {
+  TestHelpers::setEnvironment "Windows XP" myUser
+  set myAppDirs [AppDirs new myBrand myApp]
+} -body {
+  $myAppDirs configHome
+} -cleanup {
+  TestHelpers::restoreEnvironment
+} -match regexp -result {^.*?myUser.*?myBrand\\myApp$}
+
 cleanupTests

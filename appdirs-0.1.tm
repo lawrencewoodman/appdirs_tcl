@@ -47,4 +47,18 @@ package require xdgbasedir
       }
     }
   }
+
+  method configHome {} {
+    switch $method {
+      XDG {
+        return [XDG::CONFIG_HOME $appName]
+      }
+      APPDATA {
+        return [join [list $::env(APPDATA) $brandName $appName] \\]
+      }
+      default {
+        return ""
+      }
+    }
+  }
 }
