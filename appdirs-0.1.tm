@@ -51,7 +51,8 @@ package require xdgbasedir
     }
   }
 
-  # Return a list of locations for system-wide configuration files
+  # Return a list of locations for system-wide configuration files in
+  # preference order
   method configDirs {} {
     switch $::tcl_platform(os) {
       Linux {
@@ -70,7 +71,7 @@ package require xdgbasedir
     }
   }
 
-  # Return a list of locations for system-wide data files
+  # Return a list of locations for system-wide data files in preference order
   method dataDirs {} {
     switch $::tcl_platform(os) {
       Linux {
