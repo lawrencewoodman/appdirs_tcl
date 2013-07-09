@@ -40,9 +40,9 @@ returned} -setup {
   TestHelpers::restoreEnvironment
 } -match regexp -result {^.*?myUser.*?myBrand\\myApp$}
 
-test dataHome-4 {Checks that sensible Windows Vista dataHome directory \
+test dataHome-4 {Checks that sensible Windows XP dataHome directory \
 returned} -setup {
-  TestHelpers::setEnvironment "Windows Vista" myUser
+  TestHelpers::setEnvironment "Windows XP" myUser
   set myAppDirs [AppDirs new myBrand myApp]
 } -body {
   $myAppDirs dataHome
