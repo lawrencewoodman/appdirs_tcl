@@ -7,6 +7,7 @@ An application that is installed on a variety of platforms will use different lo
 Requirements
 ------------
 *  Tcl 8.6+
+*  [xdgbasedir](https://github.com/LawrenceWoodman/xdgbasedir_tcl) module
 
 Installation
 ------------
