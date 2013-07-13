@@ -19,74 +19,65 @@ package require xdgbasedir
 
   # Return location of user-specific data files
   method dataHome {} {
-    switch $::tcl_platform(os) {
-      Linux {
+    if {$::tcl_platform(platform) eq "unix"} {
+      if {$::tcl_platform(os) ne "Darwin"} {
         return [XDG::DATA_HOME $appName]
       }
-      "Windows 2000" -
-      "Windows Vista" -
-      "Windows XP"  {
-        return [join [list $::env(APPDATA) $brandName $appName] \\]
-      }
-      default {
-        return ""
-      }
+    } elseif {$::tcl_platform(platform) eq "windows"} {
+      return [join [list $::env(APPDATA) $brandName $appName] \\]
     }
+    return ""
   }
 
   # Return location of user-specific configuration files
   method configHome {} {
-    switch $::tcl_platform(os) {
-      Linux {
+    if {$::tcl_platform(platform) eq "unix"} {
+      if {$::tcl_platform(os) ne "Darwin"} {
         return [XDG::CONFIG_HOME $appName]
       }
-      "Windows 2000" -
-      "Windows Vista" -
-      "Windows XP" {
-        return [join [list $::env(APPDATA) $brandName $appName] \\]
-      }
-      default {
-        return ""
-      }
+    } elseif {$::tcl_platform(platform) eq "windows"} {
+      return [join [list $::env(APPDATA) $brandName $appName] \\]
     }
+    return ""
   }
 
   # Return a list of locations for system-wide configuration files in
   # preference order
   method configDirs {} {
-    switch $::tcl_platform(os) {
-      Linux {
+    if {$::tcl_platform(platform) eq "unix"} {
+      if {$::tcl_platform(os) ne "Darwin"} {
         return [XDG::CONFIG_DIRS $appName]
       }
-      "Windows 2000" -
-      "Windows Vista" {
-        return [join [list $::env(PROGRAMDATA) $brandName $appName] \\]
-      }
-      "Windows XP" {
-        return [join [list $::env(ALLUSERSPROFILE) $brandName $appName] \\]
-      }
-      default {
-        return ""
+    } elseif {$::tcl_platform(platform) eq "windows"} {
+      set configDir [my WindowsConfigDataDir]
+      if {[llength $configDir] != 0} {
+        return [list $configDir]
       }
     }
+    return ""
   }
 
   # Return a list of locations for system-wide data files in preference order
   method dataDirs {} {
-    switch $::tcl_platform(os) {
-      Linux {
+    if {$::tcl_platform(platform) eq "unix"} {
+      if {$::tcl_platform(os) ne "Darwin"} {
         return [XDG::DATA_DIRS $appName]
       }
-      "Windows 2000" -
-      "Windows Vista" {
-        return [join [list $::env(PROGRAMDATA) $brandName $appName] \\]
-      }
-      "Windows XP" {
-        return [join [list $::env(ALLUSERSPROFILE) $brandName $appName] \\]
-      }
-      default {
-        return ""
+    } elseif {$::tcl_platform(platform) eq "windows"} {
+      set configDir [my WindowsConfigDataDir]
+      if {[llength $configDir] != 0} {
+        return [list $configDir]
       }
     }
+    return ""
+  }
+
+  method WindowsConfigDataDir {} {
+    if {[info exists ::env(PROGRAMDATA)]} {
+      return [join [list $::env(PROGRAMDATA) $brandName $appName] \\]
+    } elseif {[info exists ::env(ALLUSERSPROFILE)]} {
+      return [join [list $::env(ALLUSERSPROFILE) $brandName $appName] \\]
+    }
+    return ""
   }
 }

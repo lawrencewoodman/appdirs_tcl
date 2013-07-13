@@ -18,7 +18,7 @@ test dataHome-1 {Checks that sensible Linux dataHome directory returned} \
   $myAppDirs dataHome
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -match regexp -result "$::env(HOME).*?myApp"
+} -match regexp -result "/home/myUser.*?myApp"
 
 test dataHome-2 {Checks that sensible Windows 2000 dataHome directory \
 returned} -setup {
@@ -58,7 +58,7 @@ test configHome-1 {Checks that sensible Linux configHome directory returned} \
   $myAppDirs configHome
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -match regexp -result "$::env(HOME).*?myApp"
+} -match regexp -result "/home/myUser.*?myApp"
 
 test configHome-2 {Checks that sensible Windows 2000 configHome directory \
 returned} -setup {
@@ -108,39 +108,30 @@ returned} -setup {
   TestHelpers::setEnvironment "Windows 2000" myUser
   set myAppDirs [AppDirs new myBrand myApp]
 } -body {
-  set configDirs [$myAppDirs configDirs]
-  TestHelpers::countMatches $configDirs {{configDir} {
-    expr {"$::env(PROGRAMDATA)\\myBrand\\myApp\$" eq $configDir}
-  }}
+  $myAppDirs configDirs
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -result 0
+} -result {{C:\ProgramData\myBrand\myApp}}
 
 test configDirs-3 {Checks that sensible Windows Vista configDirs directory \
 returned} -setup {
   TestHelpers::setEnvironment "Windows Vista" myUser
   set myAppDirs [AppDirs new myBrand myApp]
 } -body {
-  set configDirs [$myAppDirs configDirs]
-  TestHelpers::countMatches $configDirs {{configDir} {
-    expr {"$::env(PROGRAMDATA)\\myBrand\\myApp\$" eq $configDir}
-  }}
+  $myAppDirs configDirs
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -result 0
+} -result {{C:\ProgramData\myBrand\myApp}}
 
 test configDirs-4 {Checks that sensible Windows XP configDirs directory \
 returned} -setup {
   TestHelpers::setEnvironment "Windows XP" myUser
   set myAppDirs [AppDirs new myBrand myApp]
 } -body {
-  set configDirs [$myAppDirs configDirs]
-  TestHelpers::countMatches $configDirs {{configDir} {
-    expr {"$::env(ALLUSERSPROFILE)\\myBrand\\myApp\$" eq $configDir}
-  }}
+  $myAppDirs configDirs
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -result 0
+} -result {{C:\Documents and Settings\All Users\myBrand\myApp}}
 
 test dataDirs-1 {Checks that sensible Linux dataDirs directory returned} \
 -setup {
@@ -160,38 +151,29 @@ returned} -setup {
   TestHelpers::setEnvironment "Windows 2000" myUser
   set myAppDirs [AppDirs new myBrand myApp]
 } -body {
-  set dataDirs [$myAppDirs dataDirs]
-  TestHelpers::countMatches $dataDirs {{configDir} {
-    expr {"$::env(PROGRAMDATA)\\myBrand\\myApp\$" eq $configDir}
-  }}
+  $myAppDirs dataDirs
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -result 0
+} -result {{C:\ProgramData\myBrand\myApp}}
 
 test dataDirs-3 {Checks that sensible Windows Vista dataDirs directory \
 returned} -setup {
   TestHelpers::setEnvironment "Windows Vista" myUser
   set myAppDirs [AppDirs new myBrand myApp]
 } -body {
-  set dataDirs [$myAppDirs dataDirs]
-  TestHelpers::countMatches $dataDirs {{configDir} {
-    expr {"$::env(PROGRAMDATA)\\myBrand\\myApp\$" eq $configDir}
-  }}
+  $myAppDirs dataDirs
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -result 0
+} -result {{C:\ProgramData\myBrand\myApp}}
 
 test dataDirs-4 {Checks that sensible Windows XP dataDirs directory \
 returned} -setup {
   TestHelpers::setEnvironment "Windows XP" myUser
   set myAppDirs [AppDirs new myBrand myApp]
 } -body {
-  set dataDirs [$myAppDirs dataDirs]
-  TestHelpers::countMatches $dataDirs {{configDir} {
-    expr {"$::env(ALLUSERSPROFILE)\\myBrand\\myApp\$" eq $configDir}
-  }}
+  $myAppDirs dataDirs
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -result 0
+} -result {{C:\Documents and Settings\All Users\myBrand\myApp}}
 
 cleanupTests
