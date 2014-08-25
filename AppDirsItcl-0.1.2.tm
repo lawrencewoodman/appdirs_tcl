@@ -7,7 +7,8 @@
 #
 # Access the most suitable directories for an application on whatever
 # platform the application is running.
-package require Itcl latest
+package prefer latest
+package require Itcl
 package require xdgbasedir
 
 ::itcl::class AppDirs {
