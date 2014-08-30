@@ -1,16 +1,19 @@
 # Cross-platform handling of application directories
 #
 # Copyright (C) 2013 Lawrence Woodman <lwoodman@vlifesystems.com>
+# Copyright (C) 2014 Steve Havelka <steve@arieslabs.com>
 #
 # Licensed under an MIT licence.  Please see LICENCE.md for details.
 #
 # Access the most suitable directories for an application on whatever
 # platform the application is running.
-package require Tcl 8.6
+package prefer latest
+package require Itcl
 package require xdgbasedir
 
-::oo::class create AppDirs {
-  variable appName brandName
+::itcl::class AppDirs {
+  variable appName
+  variable brandName
 
   constructor {_brandName _appName} {
     set appName $_appName
