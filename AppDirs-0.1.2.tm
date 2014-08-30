@@ -20,7 +20,9 @@ package require xdgbasedir
   # Return location of user-specific data files
   method dataHome {} {
     if {$::tcl_platform(platform) eq "unix"} {
-      if {$::tcl_platform(os) ne "Darwin"} {
+      if {$::tcl_platform(os) eq "Darwin"} {
+        return [join [list "~/Library/Application Support" $brandName $appName] /]
+      } else {
         return [XDG::DATA_HOME $appName]
       }
     } elseif {$::tcl_platform(platform) eq "windows"} {
@@ -32,8 +34,10 @@ package require xdgbasedir
   # Return location of user-specific configuration files
   method configHome {} {
     if {$::tcl_platform(platform) eq "unix"} {
-      if {$::tcl_platform(os) ne "Darwin"} {
-        return [XDG::CONFIG_HOME $appName]
+      if {$::tcl_platform(os) eq "Darwin"} {
+        return [join [list "~/Library/Application Support" $brandName $appName] /]
+      } else {
+        return [XDG::DATA_HOME $appName]
       }
     } elseif {$::tcl_platform(platform) eq "windows"} {
       return [join [list $::env(APPDATA) $brandName $appName] \\]
@@ -45,8 +49,10 @@ package require xdgbasedir
   # preference order
   method configDirs {} {
     if {$::tcl_platform(platform) eq "unix"} {
-      if {$::tcl_platform(os) ne "Darwin"} {
-        return [XDG::CONFIG_DIRS $appName]
+      if {$::tcl_platform(os) eq "Darwin"} {
+        return "/Library/Application Support"
+      } else {
+        return [XDG::DATA_HOME $appName]
       }
     } elseif {$::tcl_platform(platform) eq "windows"} {
       set configDir [my WindowsConfigDataDir]
@@ -60,8 +66,10 @@ package require xdgbasedir
   # Return a list of locations for system-wide data files in preference order
   method dataDirs {} {
     if {$::tcl_platform(platform) eq "unix"} {
-      if {$::tcl_platform(os) ne "Darwin"} {
-        return [XDG::DATA_DIRS $appName]
+      if {$::tcl_platform(os) eq "Darwin"} {
+        return "/Library/Application Support"
+      } else {
+        return [XDG::DATA_HOME $appName]
       }
     } elseif {$::tcl_platform(platform) eq "windows"} {
       set configDir [my WindowsConfigDataDir]
