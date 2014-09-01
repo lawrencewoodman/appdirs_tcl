@@ -21,12 +21,12 @@ package require xdgbasedir
   method dataHome {} {
     if {$::tcl_platform(platform) eq "unix"} {
       if {$::tcl_platform(os) eq "Darwin"} {
-        return [join [list "~/Library/Application Support" $brandName $appName] /]
+        return [file join ~ Library {Application Support} $brandName $appName]
       } else {
         return [XDG::DATA_HOME $appName]
       }
     } elseif {$::tcl_platform(platform) eq "windows"} {
-      return [join [list $::env(APPDATA) $brandName $appName] \\]
+      return [file join $::env(APPDATA) $brandName $appName]
     }
     return ""
   }
@@ -35,12 +35,12 @@ package require xdgbasedir
   method configHome {} {
     if {$::tcl_platform(platform) eq "unix"} {
       if {$::tcl_platform(os) eq "Darwin"} {
-        return [join [list "~/Library/Application Support" $brandName $appName] /]
+        return [file join ~ Library {Application Support} $brandName $appName]
       } else {
         return [XDG::DATA_HOME $appName]
       }
     } elseif {$::tcl_platform(platform) eq "windows"} {
-      return [join [list $::env(APPDATA) $brandName $appName] \\]
+      return [file join $::env(APPDATA) $brandName $appName]
     }
     return ""
   }
@@ -50,7 +50,7 @@ package require xdgbasedir
   method configDirs {} {
     if {$::tcl_platform(platform) eq "unix"} {
       if {$::tcl_platform(os) eq "Darwin"} {
-        return "/Library/Application Support"
+        return [file join / Library {Application Support}]
       } else {
         return [XDG::DATA_HOME $appName]
       }
@@ -67,7 +67,7 @@ package require xdgbasedir
   method dataDirs {} {
     if {$::tcl_platform(platform) eq "unix"} {
       if {$::tcl_platform(os) eq "Darwin"} {
-        return "/Library/Application Support"
+        return [file join / Library {Application Support}]
       } else {
         return [XDG::DATA_HOME $appName]
       }
@@ -82,9 +82,9 @@ package require xdgbasedir
 
   method WindowsConfigDataDir {} {
     if {[info exists ::env(PROGRAMDATA)]} {
-      return [join [list $::env(PROGRAMDATA) $brandName $appName] \\]
+      return [file join $::env(PROGRAMDATA) $brandName $appName]
     } elseif {[info exists ::env(ALLUSERSPROFILE)]} {
-      return [join [list $::env(ALLUSERSPROFILE) $brandName $appName] \\]
+      return [file join $::env(ALLUSERSPROFILE) $brandName $appName]
     }
     return ""
   }

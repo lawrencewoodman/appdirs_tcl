@@ -7,6 +7,19 @@ namespace eval TestHelpers {
   variable storedEnvVars {}
 }
 
+rename file oldFile
+proc file {cmd args} {
+  if {$cmd eq "join"} {
+    if {$::tcl_platform(platform) eq "unix"} {
+      return [join $args /]
+    } elseif {$::tcl_platform(platform) eq "windows"} {
+      return [join $args \\]
+    }
+  }
+  return [oldFile $cmd {*}$args]
+}
+
+
 proc TestHelpers::RestoreEnvVars {} {
   variable storedEnvVars
   if {$storedEnvVars ne {}} {
