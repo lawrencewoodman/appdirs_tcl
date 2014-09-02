@@ -161,7 +161,7 @@ returned} -setup {
   $myAppDirs configDirs
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -result {{/Library/Application Support}}
+} -result {{/Library/Application Support/myBrand/myApp}}
 
 test dataDirs-1 {Checks that sensible Linux dataDirs directory returned} \
 -setup {
@@ -214,6 +214,6 @@ returned} -setup {
   $myAppDirs dataDirs
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -result {{/Library/Application Support}}
+} -result {{/Library/Application Support/myBrand/myApp}}
 
 cleanupTests
