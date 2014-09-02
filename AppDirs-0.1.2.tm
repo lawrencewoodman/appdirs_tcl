@@ -50,7 +50,7 @@ package require xdgbasedir
   method configDirs {} {
     if {$::tcl_platform(platform) eq "unix"} {
       if {$::tcl_platform(os) eq "Darwin"} {
-        return [file join / Library {Application Support}]
+        return [list [file join / Library {Application Support}]]
       } else {
         return [XDG::DATA_HOME $appName]
       }
@@ -67,7 +67,7 @@ package require xdgbasedir
   method dataDirs {} {
     if {$::tcl_platform(platform) eq "unix"} {
       if {$::tcl_platform(os) eq "Darwin"} {
-        return [file join / Library {Application Support}]
+        return [list [file join / Library {Application Support}]]
       } else {
         return [XDG::DATA_HOME $appName]
       }
