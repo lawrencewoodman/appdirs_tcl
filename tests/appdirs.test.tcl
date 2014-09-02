@@ -58,7 +58,7 @@ test dataHome-5 {Checks that sensible Darwin dataHome directory returned} \
   $myAppDirs dataHome
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -result "~/Library/Application Support/myBrand/myApp"
+} -result "/Users/myUser/Library/Application Support/myBrand/myApp"
 
 test configHome-1 {Checks that sensible Linux configHome directory returned} \
 -setup {
@@ -108,7 +108,7 @@ test configHome-5 {Checks that sensible Darwin configHome directory returned} \
   $myAppDirs configHome
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -result "~/Library/Application Support/myBrand/myApp"
+} -result "/Users/myUser/Library/Application Support/myBrand/myApp"
 
 test configDirs-1 {Checks that sensible Linux configDirs directory returned} \
 -setup {

@@ -21,7 +21,7 @@ package require xdgbasedir
   method dataHome {} {
     if {$::tcl_platform(platform) eq "unix"} {
       if {$::tcl_platform(os) eq "Darwin"} {
-        return [file join ~ Library {Application Support} $brandName $appName]
+        return [file join $::env(HOME) Library {Application Support} $brandName $appName]
       } else {
         return [XDG::DATA_HOME $appName]
       }
@@ -35,7 +35,7 @@ package require xdgbasedir
   method configHome {} {
     if {$::tcl_platform(platform) eq "unix"} {
       if {$::tcl_platform(os) eq "Darwin"} {
-        return [file join ~ Library {Application Support} $brandName $appName]
+        return [file join $::env(HOME) Library {Application Support} $brandName $appName]
       } else {
         return [XDG::DATA_HOME $appName]
       }
