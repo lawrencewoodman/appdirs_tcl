@@ -97,6 +97,11 @@ proc TestHelpers::setEnvironment {os user} {
       SetPlatform unix
       SetEnvVar HOME "/home/$user"
     }
+    "Darwin" {
+      SetOS Darwin
+      SetPlatform unix
+      SetEnvVar HOME "/home/$user"
+    }
     "Windows 2000" {
       SetOS "Windows NT"
       SetPlatform windows

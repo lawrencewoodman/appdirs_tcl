@@ -50,6 +50,16 @@ returned} -setup {
   TestHelpers::restoreEnvironment
 } -match regexp -result {^.*?myUser.*?myBrand\\myApp$}
 
+test dataHome-5 {Checks that sensible Darwin dataHome directory returned} \
+-setup {
+  TestHelpers::setEnvironment Darwin myUser
+  set myAppDirs [AppDirs new myBrand myApp]
+} -body {
+  $myAppDirs dataHome
+} -cleanup {
+  TestHelpers::restoreEnvironment
+} -result "~/Library/Application Support/myBrand/myApp"
+
 test configHome-1 {Checks that sensible Linux configHome directory returned} \
 -setup {
   TestHelpers::setEnvironment Linux myUser
@@ -89,6 +99,16 @@ returned} -setup {
 } -cleanup {
   TestHelpers::restoreEnvironment
 } -match regexp -result {^.*?myUser.*?myBrand\\myApp$}
+
+test configHome-5 {Checks that sensible Darwin configHome directory returned} \
+-setup {
+  TestHelpers::setEnvironment Darwin myUser
+  set myAppDirs [AppDirs new myBrand myApp]
+} -body {
+  $myAppDirs configHome
+} -cleanup {
+  TestHelpers::restoreEnvironment
+} -result "~/Library/Application Support/myBrand/myApp"
 
 test configDirs-1 {Checks that sensible Linux configDirs directory returned} \
 -setup {
@@ -133,6 +153,16 @@ returned} -setup {
   TestHelpers::restoreEnvironment
 } -result {{C:\Documents and Settings\All Users\myBrand\myApp}}
 
+test configDirs-5 {Checks that sensible Darwin configDirs directory \
+returned} -setup {
+  TestHelpers::setEnvironment Darwin myUser
+  set myAppDirs [AppDirs new myBrand myApp]
+} -body {
+  $myAppDirs configDirs
+} -cleanup {
+  TestHelpers::restoreEnvironment
+} -result {{/Library/Application Support}}
+
 test dataDirs-1 {Checks that sensible Linux dataDirs directory returned} \
 -setup {
   TestHelpers::setEnvironment Linux myUser
@@ -175,5 +205,15 @@ returned} -setup {
 } -cleanup {
   TestHelpers::restoreEnvironment
 } -result {{C:\Documents and Settings\All Users\myBrand\myApp}}
+
+test dataDirs-5 {Checks that sensible Darwin dataDirs directory \
+returned} -setup {
+  TestHelpers::setEnvironment Darwin myUser
+  set myAppDirs [AppDirs new myBrand myApp]
+} -body {
+  $myAppDirs dataDirs
+} -cleanup {
+  TestHelpers::restoreEnvironment
+} -result {{/Library/Application Support}}
 
 cleanupTests
