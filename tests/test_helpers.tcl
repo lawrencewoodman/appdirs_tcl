@@ -11,6 +11,9 @@ rename file oldFile
 proc file {cmd args} {
   if {$cmd eq "join"} {
     if {$::tcl_platform(platform) eq "unix"} {
+      if {[lindex $args 0] eq "/"} {
+        lset args 0 {}
+      }
       return [join $args /]
     } elseif {$::tcl_platform(platform) eq "windows"} {
       return [join $args \\]
