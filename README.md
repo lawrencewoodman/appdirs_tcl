@@ -43,6 +43,11 @@ First create an instance of the `AppDirs` class by instantiating it with a _bran
     # Return a list of locations for system-wide data files in preference order
     puts "config dirs: [$myAppDirs configDirs]"
 
+Default Directories
+-------------------
+To list the default directories for various platforms and to see the directories being used for the current system run:
+
+    $ tclsh bin/listdirs.tcl
 
 Testing
 -------
