@@ -28,7 +28,7 @@ returned} -setup {
   $myAppDirs dataHome
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -match regexp -result {^.*?myUser.*?myBrand\\myApp$}
+} -result {C:\Documents and Settings\myUser\Application Data\myBrand\myApp}
 
 test dataHome-3 {Checks that sensible Windows Vista dataHome directory \
 returned} -setup {
@@ -38,7 +38,7 @@ returned} -setup {
   $myAppDirs dataHome
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -match regexp -result {^.*?myUser.*?myBrand\\myApp$}
+} -result {C:\Documents and Settings\myUser\Application Data\myBrand\myApp}
 
 test dataHome-4 {Checks that sensible Windows XP dataHome directory \
 returned} -setup {
@@ -48,7 +48,7 @@ returned} -setup {
   $myAppDirs dataHome
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -match regexp -result {^.*?myUser.*?myBrand\\myApp$}
+} -result {C:\Documents and Settings\myUser\Application Data\myBrand\myApp}
 
 test dataHome-5 {Checks that sensible Darwin dataHome directory returned} \
 -setup {
@@ -78,7 +78,7 @@ returned} -setup {
   $myAppDirs configHome
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -match regexp -result {^.*?myUser.*?myBrand\\myApp$}
+} -result {C:\Documents and Settings\myUser\Application Data\myBrand\myApp}
 
 test configHome-3 {Checks that sensible Windows Vista configHome directory \
 returned} -setup {
@@ -88,7 +88,7 @@ returned} -setup {
   $myAppDirs configHome
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -match regexp -result {^.*?myUser.*?myBrand\\myApp$}
+} -result {C:\Documents and Settings\myUser\Application Data\myBrand\myApp}
 
 test configHome-4 {Checks that sensible Windows XP configHome directory \
 returned} -setup {
@@ -98,7 +98,7 @@ returned} -setup {
   $myAppDirs configHome
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -match regexp -result {^.*?myUser.*?myBrand\\myApp$}
+} -result {C:\Documents and Settings\myUser\Application Data\myBrand\myApp}
 
 test configHome-5 {Checks that sensible Darwin configHome directory returned} \
 -setup {
