@@ -18,7 +18,7 @@ test dataHome-1 {Checks that sensible Linux dataHome directory returned} \
   $myAppDirs dataHome
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -match regexp -result "/home/myUser.*?myApp"
+} -result "/home/myUser/.local/share/myApp"
 
 test dataHome-2 {Checks that sensible Windows 2000 dataHome directory \
 returned} -setup {
@@ -68,7 +68,7 @@ test configHome-1 {Checks that sensible Linux configHome directory returned} \
   $myAppDirs configHome
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -match regexp -result "/home/myUser.*?myApp"
+} -result "/home/myUser/.config/myApp"
 
 test configHome-2 {Checks that sensible Windows 2000 configHome directory \
 returned} -setup {
@@ -115,13 +115,10 @@ test configDirs-1 {Checks that sensible Linux configDirs directory returned} \
   TestHelpers::setEnvironment Linux myUser
   set myAppDirs [AppDirs new myBrand myApp]
 } -body {
-  set configDirs [$myAppDirs configDirs]
-  TestHelpers::countMatches $configDirs {{configDir} {
-    expr {![regexp {^.*myApp$} $configDir]}
-  }}
+  $myAppDirs configDirs
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -result 0
+} -result {/etc/xdg/myApp}
 
 test configDirs-2 {Checks that sensible Windows 2000 configDirs directory \
 returned} -setup {
@@ -168,13 +165,10 @@ test dataDirs-1 {Checks that sensible Linux dataDirs directory returned} \
   TestHelpers::setEnvironment Linux myUser
   set myAppDirs [AppDirs new myBrand myApp]
 } -body {
-  set dataDirs [$myAppDirs dataDirs]
-  TestHelpers::countMatches $dataDirs {{configDir} {
-    expr {![regexp {^.*myApp$} $configDir]}
-  }}
+  $myAppDirs dataDirs
 } -cleanup {
   TestHelpers::restoreEnvironment
-} -result 0
+} -result {/usr/local/share/myApp /usr/share/myApp}
 
 test dataDirs-2 {Checks that sensible Windows 2000 dataDirs directory \
 returned} -setup {

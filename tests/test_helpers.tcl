@@ -96,6 +96,10 @@ proc TestHelpers::setEnvironment {os user} {
       SetOS Linux
       SetPlatform unix
       SetEnvVar HOME "/home/$user"
+      SetEnvVar XDG_DATA_HOME [file join $::env(HOME) .local share]
+      SetEnvVar XDG_CONFIG_HOME [file join $::env(HOME) .config]
+      SetEnvVar XDG_DATA_DIRS "[file join /usr local share]:[file join /usr share]"
+      SetEnvVar XDG_CONFIG_DIRS [file join /etc xdg]
     }
     "Darwin" {
       SetOS Darwin

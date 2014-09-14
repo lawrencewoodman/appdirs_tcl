@@ -37,7 +37,7 @@ package require xdgbasedir
       if {$::tcl_platform(os) eq "Darwin"} {
         return [file join $::env(HOME) Library {Application Support} $brandName $appName]
       } else {
-        return [XDG::DATA_HOME $appName]
+        return [XDG::CONFIG_HOME $appName]
       }
     } elseif {$::tcl_platform(platform) eq "windows"} {
       return [file join $::env(APPDATA) $brandName $appName]
@@ -53,7 +53,7 @@ package require xdgbasedir
         return [list [file join / Library {Application Support} $brandName \
                                 $appName]]
       } else {
-        return [XDG::DATA_HOME $appName]
+        return [XDG::CONFIG_DIRS $appName]
       }
     } elseif {$::tcl_platform(platform) eq "windows"} {
       set configDir [my WindowsConfigDataDir]
@@ -71,7 +71,7 @@ package require xdgbasedir
         return [list [file join / Library {Application Support} $brandName \
                                 $appName]]
       } else {
-        return [XDG::DATA_HOME $appName]
+        return [XDG::DATA_DIRS $appName]
       }
     } elseif {$::tcl_platform(platform) eq "windows"} {
       set configDir [my WindowsConfigDataDir]
