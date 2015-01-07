@@ -2,6 +2,8 @@
 # Lists the default directories for various platforms and
 # lists the directories being used for the current system.
 
+package require Tcl 8.5
+
 # Add module dir to tm paths
 set ThisScriptDir [file dirname [info script]]
 set ModuleDir [file normalize [file join $ThisScriptDir ..]]

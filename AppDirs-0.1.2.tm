@@ -6,6 +6,8 @@
 #
 # Access the most suitable directories for an application on whatever
 # platform the application is running.
+#
+package require Tcl 8.5
 package require TclOO
 package require xdgbasedir
 
