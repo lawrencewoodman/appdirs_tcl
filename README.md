@@ -7,6 +7,7 @@ An application that is installed on a variety of platforms will use different lo
 Requirements
 ------------
 *  Tcl 8.5+
+*  [Tcllib](http://core.tcl.tk/tcllib/home)
 *  [TclOO](http://core.tcl.tk/tcloo/wiki?name=TclOO+Package) (Included as part of the core distribution from Tcl 8.6)
 *  [xdgbasedir](https://github.com/LawrenceWoodman/xdgbasedir_tcl) module
 
