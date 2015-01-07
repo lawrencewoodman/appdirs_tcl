@@ -1,4 +1,4 @@
-#!/bin/env tclsh
+#!/usr/bin/env tclsh
 # Lists the default directories for various platforms and
 # lists the directories being used for the current system.
 
