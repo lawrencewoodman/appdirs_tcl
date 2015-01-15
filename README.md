@@ -2,7 +2,7 @@ AppDirs
 =======
 A Tcl module to simplify cross-platform application file locations
 
-An application that is installed on a variety of platforms will use different locations on each platform to access files.  This module aims to provide access to these locations through a common interface.  For each operating system the module aims to use an appropriate standard for the locations, for example on Linux the [XDG Base Directory Specification](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html) is used and on Microsoft Windows the most common locations for each version of the operating system is used.
+An application that is installed on a variety of platforms will use different locations on each platform to access files.  This module aims to provide access to these locations through a common interface.  For each operating system the module aims to use an appropriate standard for the locations, for example on Linux the [XDG Base Directory Specification](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html) is used and on Microsoft Windows or Darwin/Mac OS X the most common locations for each version of the operating system is used.
 
 Requirements
 ------------
