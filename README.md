@@ -63,6 +63,6 @@ If you want to improve this module make a pull request to the [repo](https://git
 
 Licence
 -------
-Copyright (C) 2013, Lawrence Woodman <lwoodman@vlifesystems.com>
+Copyright (C) 2013-2015, Lawrence Woodman <lwoodman@vlifesystems.com>
 
 This software is licensed under an MIT Licence.  Please see the file, LICENCE.md, for details.
