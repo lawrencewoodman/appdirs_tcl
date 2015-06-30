@@ -1,3 +1,8 @@
+0.2 (30th June 2015)
+--------------------
+* Add support for Darwin (Thanks to Steve Havelka)
+* Add _bin/listdirs.tcl_ to list which directories are used
+
 0.1.2 (13th July 2013)
 --------------------
 * Add xdgbasedir module to requirements in README
